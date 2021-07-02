@@ -227,14 +227,71 @@ response.on('error', console.error)
 
 > http-collect.js
 >
-> http GET으로 데이터 받아와서 첫번째 줄에는  글자 수, 두번째줄에는 받아온 문자열 출력하기
+> http GET으로 데이터 모두 받아와서 첫번째 줄에는  글자 수, 두번째줄에는 받아온 문자열 출력하기
+
+* 모든 데이터 붙이기
+
+``` js
+response.on('data', (data) => {
+    body += data
+})
+```
+
+
+
+* end
+
+```js
+response.on('end', () => {
+```
 
 
 
 
 
-* JUGGLING ASYNC
-* TIME SERVER
+## JUGGLING ASYNC
+
+> juggling-async.js
+>
+> 여러개 url에서 순서대로 데이터 받아서 출력하기
+
+* 반복문
+
+```js
+paths.forEach((e, i) => {
+    http.get(e, (response) => {
+```
+
+
+
+* 다 받아왔으면 불러온 순서대로 한꺼번에 출력
+
+```js
+response.on('end', () => {
+    cnt++
+    if (cnt === 3) {
+```
+
+
+
+
+
+## TIME SERVER
+
+> time-server.js
+>
+> 주어진 port번호를 통해 TCP 통신으로 시각 포맷에 맞게 출력하기
+
+* net
+
+```js
+const net = require('net')
+```
+
+
+
+
+
 * HTTP FILE SERVER
 * HTTP UPPERCASERER
 * HTTP JSON API SERVER

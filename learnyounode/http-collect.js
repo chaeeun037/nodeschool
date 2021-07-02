@@ -10,14 +10,16 @@
  */
 
 const http = require('http')
-const concatStream = require('concat-stream')
 const path = process.argv[2]
 
 http.get(path, (response) => {
+    let body = ''
     response.setEncoding('utf8')
-    let cnt = 0
-    response.pipe(concatStream(data => {
-        cnt++
-        return data.toString()
-    }).end('data', console.log))
-}).on('error', console.error)
+    response.on('data', (data) => {
+        body += data
+    })
+    response.on('end', () => {
+        console.log(body.length)
+        console.log(body)
+    })
+})
