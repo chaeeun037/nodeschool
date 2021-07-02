@@ -137,15 +137,102 @@ function callback (err, data) { /* ... */ }
 >
 > 비동기 i/o를 이용해서 주어진 파일 확장명에 해당되는 파일명 출력하기
 
+* fs.readdir
+
+```js
+fs.readdir(file, (err, data) => {
+```
 
 
 
 
 
+## MAKE IT MODULAR
 
-* MAKE IT MODULAR
-* HTTP CLIENT
-* HTTPCOLLECT
+> make-it-modular.js
+>
+> mymodule.js
+>
+> 앞의 작업을 모듈화를 통해 파일을 나누기
+
+* module.exports // mymodule.js
+
+```js
+module.exports = function (path, ext, callback) {
+```
+
+
+
+* // make-it-modular.js
+
+```js
+mymodule(path, ext, (err, data) => {
+```
+
+
+
+## HTTP CLIENT
+
+> http-client.js
+>
+> http GET 요청으로 받아온 데이터 출력하기
+
+* http
+
+```js
+const http = require('http')
+```
+
+
+
+* http get
+
+```js
+http.get(path, (response) => {
+```
+
+
+
+* response encoding
+
+```js
+response.setEncoding('utf8')
+```
+
+
+
+* get data
+
+```js
+response.on('data', (data) => {
+```
+
+
+
+* error
+
+```js
+// http.get
+http.get(...).on('error', console.error)
+
+// response
+response.on('error', console.error)
+```
+
+
+
+
+
+## HTTP COLLECT
+
+> http-collect.js
+>
+> http GET으로 데이터 받아와서 첫번째 줄에는  글자 수, 두번째줄에는 받아온 문자열 출력하기
+
+
+
+
+
 * JUGGLING ASYNC
 * TIME SERVER
 * HTTP FILE SERVER

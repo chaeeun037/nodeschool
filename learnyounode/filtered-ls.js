@@ -17,20 +17,24 @@
   You must use asynchronous I/O.
  */
 
-const fs = require('fs')
+const fs = require('fs') 
 const path = process.argv[2]
 const ext = process.argv[3]
 
-fs.readFile(path, (err, data) => {
+fs.readdir(path, (err, data) => {
     if (err) {
         return console.log(err)
     }
-    const files = data.toString().split('\n')
 
-    let filteredFiles = files.filter(e => {
+    let filteredData = data.filter(e => {
         let doti = e.lastIndexOf('.')
+        if(doti < 0) {
+            return false
+        }
         return ext === e.substring(doti + 1)
     })
 
-    console.log(filteredFiles)
+    for(let file of filteredData) {
+        console.log(file)
+    }
 })
