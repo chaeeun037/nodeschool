@@ -22,7 +22,7 @@
 
 ## 기간
 
-2021.07.02 - 
+2021.07.02 - 2021.07.04
 
 
 
@@ -33,6 +33,14 @@
 * Node.js는 무엇인가요? 에 대한 정확한 대답을 한다.
 * 튜토리얼을 통해 간단한 실습을 진행한다.
 * 공식 문서를 가볍게 훑어봤다.
+
+
+
+
+
+## 학습 완료
+
+![](C:\Users\Chaeeun Kim\Documents\git\nodeschool\learnyounode\complete.JPG)
 
 
 
@@ -52,15 +60,11 @@ npm install -g learnyounode
 learnyounode
 ```
 
-![](C:\Users\Chaeeun Kim\Documents\git\nodeschool\learnyounode\index.JPG)
 
 
 
 
-
-
-
-## HELLO WORLD
+## 1. HELLO WORLD
 
 > hello-world.js
 >
@@ -68,7 +72,7 @@ learnyounode
 
 
 
-## BABY STEPS
+## 2. BABY STEPS
 
 > baby-steps.js
 >
@@ -290,8 +294,113 @@ const net = require('net')
 
 
 
+* create server
+
+```js
+const server = net.createServer(socket => {
+```
 
 
-* HTTP FILE SERVER
-* HTTP UPPERCASERER
-* HTTP JSON API SERVER
+
+* socket write
+
+```js
+// socket.write()도 가능
+socket.end(YYYY + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + '\n')
+```
+
+
+
+* server listen
+
+```js
+server.listen(port)
+```
+
+
+
+* date
+
+```js
+const date = new Date()
+// date.getFullYear() 등 함수 사용 가능
+```
+
+
+
+
+
+## HTTP FILE SERVER
+
+> http-file-server.js
+>
+> http 통신으로 각 요청에 같은 텍스트 파일 전송하기
+
+* http 서버 만들기
+
+```js
+const server = http.createServer((request, response) => {
+```
+
+
+
+* 응답으로 파일 내용 보내기
+
+```js
+fs.createReadStream(path).pipe(response)
+```
+
+
+
+
+
+## HTTP UPPERCASERER
+
+> http-uppercaserer.js
+>
+> POST 요청에 대해서 body로 오는 데이터 대문자로 변경해서 반환하기
+
+* post 요청인지 확인
+
+```js
+if(req.method !== 'POST') {
+```
+
+
+
+
+
+#### 메모
+
+* on 방식과 pipe 방식 차이?
+
+
+
+
+
+## HTTP JSON API SERVER
+
+> http-json-api-server.js
+>
+> unixtime 받아서 json 형식의 hour, minute, second 데이터로 변환해서 전송하기
+
+* url 객체로 변환해서 쉽게 다룰 수 있다.
+
+```js
+let url = require('url')
+
+url = url.parse(req.url, true)	// url 객체로 변환, parseQueryString: True
+
+let time = new Date(url.query.iso)	// query로 원하는 데이터를 뽑아낼 수 있다. 여기서는 iso
+
+if (url.pathname === '/api/parsetime') {
+```
+
+
+
+* 데이터 보낼 때는 string을 json형식으로 보내야 오류가 나지 않는다.
+
+```js
+res.end(JSON.stringify(time))
+```
+
