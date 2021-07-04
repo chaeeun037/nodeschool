@@ -40,7 +40,7 @@
 
 ## 학습 완료
 
-![](C:\Users\Chaeeun Kim\Documents\git\nodeschool\learnyounode\complete.JPG)
+![](https://github.com/chaeeun037/nodeschool/blob/4ee0546e782c625fc0ead169cb24ef539f8ff99f/learnyounode/complete.JPG)
 
 
 
